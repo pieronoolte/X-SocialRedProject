@@ -1,0 +1,43 @@
+.tweet-input {
+  border: 0;
+  background: black;
+
+  &:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: black;
+  }
+}
+
+@mixin placeholder($color, $size:"") {
+  &::-webkit-input-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &:-moz-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &::-moz-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    @if $size != "" {
+      font-size: $size;
+    }
+  }
+}
+
+// Use placeholder mixin (the size parameter is optional)
+[placeholder] {
+  @include placeholder(rgb(114, 114, 114), 1.5rem);
+}

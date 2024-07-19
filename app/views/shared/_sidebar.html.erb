@@ -1,0 +1,65 @@
+<aside class="col-3 side-navbar mt-4 h-100"> 
+  <%= link_to dashboard_path, class: "d-block mb-4" do %>
+    <div class="bg-white rounded-pill" style="width: 50px; height: 50px;"><%= image_tag "logoX.png", width:"50", height: "50"%></div>
+  <% end %>
+
+  <%= link_to dashboard_path, class: "text-decoration-none d-block" do %>
+    <div class="d-flex align-items-center text-white fs-5 m-2 fw-medium">
+      <div class="bg-white rounded-pill position-relative me-2" style="width: 50px; height: 50px">
+        <%= image_tag "home.png", width: "60", height: "60", class: "position-absolute top-0 start-0", style: " transform: translate(-10%,-10%);" %>
+      </div>
+      <div class="hover-shadow p-2 px-3 rounded-pill">Home</div>
+    </div>
+  <% end %>
+  
+  <%= link_to "", class: "text-decoration-none d-block" do %>
+    <div class="d-flex align-items-center text-white fs-5 m-2 fw-medium">
+      <div class="bg-white rounded-pill me-1" style="width: 55px; height: 55px;"><%= image_tag "explore.png", width:"55", height: "55"%></div>
+      <div class="hover-shadow p-2 px-3 rounded-pill">Explore</div>
+    </div>
+  <% end %>
+
+  <%= link_to "", class: "text-decoration-none d-block" do %>
+    <div class="d-flex align-items-center text-white fs-5 m-2 fw-medium">
+      <div class="bg-white rounded-pill position-relative me-2" style="width: 50px; height: 50px">
+        <%= image_tag "bell.png", width: "60", height: "60", class: "position-absolute top-0 start-0", style: " transform: translate(-10%,-10%);" %>
+      </div>
+      <div class="hover-shadow p-2 px-3 rounded-pill">Notifications</div>
+    </div>
+  <% end %>
+
+  <%= link_to "", class: "text-decoration-none d-block" do %>
+    <div class="d-flex align-items-center text-white fs-5 m-2 mt-3 ms-3 fw-medium">
+      <div class="bg-white position-relative me-3" style="width: 38px; height: 32px">
+        <%= image_tag "messages.png", width: "35", height: "40", class: "position-absolute top-0 start-0", style: " transform: translate(2%,-10%);" %>
+      </div>
+      <div class="hover-shadow p-2 px-3 rounded-pill">Messages</div>  
+    </div>
+  <% end %>
+
+  <%= link_to "", class: "text-decoration-none d-block" do %>
+    <div class="d-flex align-items-center text-white  fs-5 m-2 mt-4 ms-3 fw-medium">
+      <div class="bg-white position-relative me-4" style="width: 32px; height: 38px">
+        <%= image_tag "notes.png", width: "40", height: "40", class: "position-absolute top-0 start-0", style: " transform: translate(-10%,-3%);" %>
+      </div>
+      <div class="hover-shadow p-2 px-3 rounded-pill">Bookmarks</div>   
+    </div>
+  <% end %>
+
+  <%= link_to "", class: "text-decoration-none d-block" do %>
+    <div class="d-flex align-items-center text-white fs-5 m-3 fw-medium">
+      <div class="bg-white rounded-pill position-relative me-3" style="width: 40px; height: 40px">
+        <%= image_tag "profile.png", width: "50", height: "50", class: "position-absolute top-0 start-0", style: " transform: translate(-10%,-10%);" %>
+      </div>
+      <div class="hover-shadow p-2 px-3 rounded-pill">Profile</div>
+    </div>
+  <% end %>
+  
+  <div class="mt-4 btn rounded-pill px-5 text-decoration-none fs-4 m-2 fw-semibold custom-button w-75 mb-8" style="text-overflow: unset; color: rgb(255, 255, 255);" data-bs-toggle="modal" data-bs-target="#postModal">Post</div>
+
+  
+  
+  <div style="width: 300.75px">
+    <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "btn btn-light text-decoration-none fs-4 m-2 fw-semibold rounded-pill px-5 w-75 mt-8" %>
+  </div>
+</aside>

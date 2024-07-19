@@ -1,0 +1,32 @@
+<!-- Modal -->
+  <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered shadow">
+      <div class="modal-content border border-secondary bg-black">
+        <div class="modal-body d-flex flex-column">
+          <div class="d-flex justify-content-between mb-4">
+            <div class="bg-white rounded-pill" style="width: 30px; height: 30px;"><%= image_tag "logoX.png", width:"30", height: "30"%></div>
+            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+            <%= form_with model: Tweet.new, method: :post, url: tweets_path, class: "w-100 tweetForm" do |f| %>
+              <%= f.text_area :body, placeholder: "What's happening?", class: "form-control w-100 tweet-input text-white mb-2" %>
+              <div class="d-flex justify-content-end">
+              <%# <%= f.submit "Post", class: "btn btn-light text-decoration-none fs-5 m-2 fw-semibold rounded-pill px-4"%>
+              <%= f.submit "Post", class: "btn btn-light text-decoration-none fs-5 m-2 fw-semibold rounded-pill px-4", "data-bs-dismiss" => "modal", "aria-label" => "Close" %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="application/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var forms = document.getElementsByClassName('tweetForm');
+    
+    Array.prototype.forEach.call(forms, function(form) {
+      form.addEventListener('turbo:submit-end', function() {
+        form.reset();
+      });
+    });
+  });
+</script>

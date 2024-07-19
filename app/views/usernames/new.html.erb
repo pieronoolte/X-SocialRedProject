@@ -1,0 +1,19 @@
+
+<div class="container py-5" style="max-width: 540px">
+  <h2>Set your Username</h2>
+
+  <%= form_with model: current_user, local: true, url: username_path(current_user) do |f|%>
+    <div class="field mb-3">
+      <%= f.label :username, class: "form-label" %><br />
+      <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control" %>
+    </div>
+
+    <div class="field mb-3">
+      <%= f.label :display_name, class: "form-label" %><br />
+      <%= f.text_field :display_name, autofocus: true, class: "form-control" %>
+    </div>
+  
+    <%= f.submit "Set Username", style:"text-overflow: unset; color: rgb(255, 255, 255);", class: "btn rounded-pill px-4 text-decoration-none fs-5 m-2 fw-semibold custom-button"%>
+  <% end %>
+  
+</div>
