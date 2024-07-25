@@ -1,11 +1,95 @@
-<%= turbo_frame_tag dom_id(tweet) do%>
-  <div class="tweet px-5 py-3">
-    <% if ( Time.zone.now - tweet.created_at ) > 1.day %>
-      <p class="text-secondary">@<%= tweet.user.username%><span class="mx-1">.</span><%= tweet.created_at.strftime("%b %-d")%></p>
-    <% else %>
-      <p class="text-secondary">@<%= tweet.user.username%><span class="mx-1">.</span><%= time_ago_in_words(tweet.created_at)%></p>
-    <% end %>
+<%= turbo_frame_tag dom_id(tweet_presenter.tweet) do%>
+  <div class="tweet px-3 py-3">
+    <div class="d-flex flex-row mb-2">
+      <div class="me-2 rounded-circle bg-secondary-subtle" style="width: 40px; height: 40px">
+        <%= image_tag tweet_presenter.avatar,  width: "32", height: "31", class: "ms-1 mt-1"%>
+      </div>
+      <div>
+        <p class="text-secondary mb-1">
+          <%= content_tag :span, tweet_presenter.display_name, class: 'fw-bolder text-white' %>
+          @<%= tweet_presenter.username%>
+          <span class="mx-1">.</span>
+          <%= tweet_presenter.created_at %>
+        </p>
+        <p class="ms-1"><%= tweet_presenter.body%></p>
+      </div>
+    </div>
+      <div class="d-flex justify-content-evenly text-secondaryflex-row" style="font-size: 14px">
+        <div class="d-flex flex-row image-container ">
+          <div class="mx-1">
+            <%= image_tag "coment.png", width: "16", height: "16", class: "mt-1 default-image" %>
+            <%= image_tag "comentHover.png", width: "16", height: "16", class: "mt-1 hover-image" %>
+          </div>
+          <span class="tools-hover-text mx-2 px-1">1k</span>
+        </div>
+        <div class="d-flex flex-row image-container ">
+          <div class="mx-1">
+            <%= image_tag "repost.png", width: "16", height: "16", class: "mt-1 default-image" %>
+            <%= image_tag "repostHover.png", width: "16", height: "16", class: "mt-1 hover-image" %>
+          </div>
+          <span class="repost-hover-text mx-2 px-1">1k</span>
+        </div>
+
+        <%= link_to tweet_presenter.retweet_tweet_url, data: { "turbo_method": tweet_presenter.turbo_retweet_data_method}, class: "d-flex flex-row image-container text-decoration-none text-secondary" do%>
+          <div class="mx-1">
+            <%= image_tag tweet_presenter.retweet_image, width: "16", height: "16", class: "mt-1 default-image" %>
+            <%= image_tag "repostHover.png", width: "16", height: "16", class: "mt-1 hover-image" %>
+          </div>
+          <span class="repost-hover-text mx-2 px-1" style="<%= tweet_presenter.retweet_style_color %>"><%= tweet_presenter.retweets_count %></span>
+        <% end %>
+        
+        <%= link_to tweet_presenter.like_tweet_url, data: { "turbo_method": tweet_presenter.turbo_like_data_method}, class: "d-flex flex-row image-container text-decoration-none text-secondary" do%>
+          <div class="mx-1">
+            <%= image_tag tweet_presenter.like_heart_image, width: "16", height: "16", class: "mt-1 default-image" %>
+            <%= image_tag "likeHover.png", width: "16", height: "16", class: "mt-1 hover-image" %>
+          </div>
+          <span class="like-hover-text mx-2 px-1" style="<%= tweet_presenter.style_color %>"><%= tweet_presenter.likes_count %></span>
+        <% end %>
+        
+        <%= link_to "#", class: "d-flex flex-row image-container text-decoration-none text-secondary" do%>
+          <div class="mx-1">
+            <%= image_tag "bars.png", width: "16", height: "16", class: "mt-1 default-image" %>
+            <%= image_tag "barsHover.png", width: "16", height: "16", class: "mt-1 hover-image"%>
+          </div>
+          <span class="tools-hover-text mx-2 px-1">1k</span>
+        <% end %>
+
+        <div class="d-flex flex-row">
+          <%= link_to tweet_presenter.bookmark_tweet_url, data: { "turbo_method": tweet_presenter.turbo_bookmark_data_method}, class: "d-flex flex-row image-container text-decoration-none text-secondary" do%>
+            <%= image_tag tweet_presenter.bookmark_image, width: "14", height: "14", class: "mb-1 default-image", data: { bs_toggle: "popover", bs_trigger: "hover", bs_content: "Bookmark", bs_custom_class: "custom-popover" } %>  
+            <%= image_tag "bookmarkHover.png", width: "14", height: "14", class: "mb-1 hover-image", data: { bs_toggle: "popover", bs_trigger: "hover", bs_content: "Bookmark", bs_custom_class: "custom-popover" } %>
+          <% end %> 
+          <div class="image-container mx-1">
+            <%= image_tag "share.png", width: "14", height: "14", class: "mb-1 default-image", data: { bs_toggle: "popover", bs_trigger: "hover", bs_content: "Share" } %>
+            <%= image_tag "shareHover.png", width: "14", height: "14", class: "mb-1 hover-image", data: { bs_toggle: "popover", bs_trigger: "hover", bs_content: "Share" } %>
+          </div>          
+        </div>
+        
+      </div>
     
-    <p class="mb-0"><%= tweet.body%></p>
   </div>
 <% end %>
+
+
+<%# <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+<script>
+  document.addEventListener('turbo:load', function () {
+    initializePopovers();
+  });
+
+  document.addEventListener('turbo:frame-load', function () {
+    initializePopovers();
+  });
+
+  function initializePopovers() {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    initializePopovers();
+  });
+</script> %>

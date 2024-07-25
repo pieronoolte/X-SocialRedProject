@@ -12,8 +12,13 @@
       <%= f.label :display_name, class: "form-label" %><br />
       <%= f.text_field :display_name, autofocus: true, class: "form-control" %>
     </div>
+
+    <div class="field mb-3">
+      <%= f.label :avatar, class: "form-label" %><br />
+      <%= f.file_field :avatar, autofocus: true, class: "form-control" %>
+    </div>
   
-    <%= f.submit "Set Username", style:"text-overflow: unset; color: rgb(255, 255, 255);", class: "btn rounded-pill px-4 text-decoration-none fs-5 m-2 fw-semibold custom-button"%>
+    <%= f.submit "Set User Info", style:"text-overflow: unset; color: rgb(255, 255, 255);", class: "btn rounded-pill px-4 text-decoration-none fs-5 m-2 fw-semibold custom-button"%>
   <% end %>
   
 </div>

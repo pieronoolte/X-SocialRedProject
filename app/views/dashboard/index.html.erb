@@ -10,7 +10,7 @@
   <% end %> 
   <%= render "shared/tweet_modal" %>
   <div id="tweets" class="mt-3">
-    <%= render Tweet.order(created_at: :desc) %>
+    <%= render partial: "tweets/tweet", collection: @tweets, as: :tweet_presenter%>
   </div>
 
 </div>
